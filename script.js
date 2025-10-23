@@ -423,6 +423,24 @@ const updateShareURL = () => {
   }
 };
 
+/* History */
+
+const historyBack = () => {
+  console.log('stepped back in history');
+}
+
+const historyForward = () => {
+  console.log('stepped forward in history');
+}
+
+const saveHistory = () => {
+  console.log('saved history');
+}
+
+const restoreHistory = (id) => {
+  console.log(`restored history ${id}`);
+}
+
 /* Other */
 
 const toggleControl = (control, enable) => {
@@ -449,6 +467,9 @@ const bind = () => {
   $("#btnReset").click(reset);
   $("#btnCopyShareURL").click(copyShareURL);
 
+  $('#btnHistoryBack').click(historyBack);
+  $('#btnHistoryForward').click(historyForward);
+
   $(document).keyup(handleKeyup);
 };
 
@@ -461,6 +482,7 @@ const initialize = () => {
   lio.readURL();
 };
 
+let history = [];
 let copyToast;
 let lio = new LinkIO(
     baseURL,
