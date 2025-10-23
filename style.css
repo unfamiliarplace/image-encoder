@@ -325,6 +325,11 @@ input.halfWidth {
 
 /* history */
 
+/* TODO */
+#optionBlockHistory {
+  display: none;
+}
+
 #historySelector {
   margin-top: 5px;
 }
