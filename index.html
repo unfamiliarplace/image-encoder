@@ -127,13 +127,13 @@
             <p><strong>Image Encoder</strong> is a simple demo of how images could be encoded using a linear array
                 of binary or hexademical pixels.</p>
             <p>The width and height can be specified in binary or hex.</p>
-            <p>Pixels can be expressed using binary (01) for black and white respectively, in which case each digit
-                is a pixel. Or they can be expressed using hex (0123456789ABCDEF) in blocks of 6 characters
+            <p>Pixels can be expressed using binary (<code>01</code>) for black and white respectively, in which case each digit
+                is a pixel. Or they can be expressed using hex (<code>0123456789ABCDEF</code>) in blocks of 6 characters
                 corresponding to traditional RGB hex codes.</p>
             <p>You can also toggle whether the border is in binary B&W or hex RGB. Clear the input to remove the
                 border.</p>
             <p>Finally, you can share images using a URL, or right-click the image itself to download it.</p>
-            <p>Notes</p>
+            <h3>Notes</h3>
             <ul>
                 <li>Missing pixels will be transparent and show the background of the app.</li>
                 <li>Extra pixels will be ignored. In RGB mode, unfinished pixels will be interpreted as hex codes if
@@ -143,10 +143,10 @@
                     pixels without affecting the result.
                 </li>
                 <li>Conversion is done automatically. When converting from hex/RGB to binary/B&W, since this is a
-                    lossy encoding, any colour with an average brightness >= 50% will be converted to white (1),
-                    otherwise it will be converted to black (0).
+                    lossy encoding, any colour with an average brightness >= 50% will be converted to white (<code>1</code>),
+                    otherwise it will be converted to black (<code>0</code>).
                 </li>
-                <li>This tool is not guaranteed to be responsive on mobile devices.</li>
+                <li>This tool is probably not responsive on mobile devices.</li>
             </ul>
         </div>
     </div>
