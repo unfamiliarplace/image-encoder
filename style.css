@@ -322,3 +322,23 @@ input.halfWidth {
   height: 35px;
   width: 100px;
 }
+
+/* history */
+
+#historySelector {
+  margin-top: 5px;
+}
+
+.historySelected {
+  font-style: italic;
+}
+
+#historyButtons {
+  justify-content: center;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+#historyButtons button {
+  padding: 5px;
+}
