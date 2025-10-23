@@ -380,11 +380,11 @@ const unpackSaveData = (data) => {
     return;
   }
 
-  let w = parseInt(data["w"], 36);
-  let h = parseInt(data["h"], 36);
-  let p = lio.decompress(data["p"]);
-  let b = parseInt(data["b"], 36);
-  let s = data["s"];
+  let w = parseInt(data["width"], 36);
+  let h = parseInt(data["height"], 36);
+  let p = lio.decompress(data["pixels"]);
+  let b = parseInt(data["border"], 36);
+  let s = data["settings"];
 
   setData(w, h, p, b, s);
 }
