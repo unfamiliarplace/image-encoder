@@ -1,0 +1,324 @@
+body {
+  background: #0d1033;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+#dropzoneContainer,
+#dropzone {
+  position: fixed;
+  display: none;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 100;
+}
+
+#app {
+  position: relative;
+  background: #344e69;
+  color: #fff;
+  font-family: "Helvetica", "Arial", sans-serif;
+  margin: auto;
+  box-sizing: border-box;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+}
+
+#mainPanel {
+  position: relative;
+  box-sizing: border-box;
+  padding: 6px;
+  flex-grow: 1;
+}
+
+#guessPanel {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+#footer {
+  color: #eee;
+  width: 100%;
+  font-size: 12px;
+  background: rgba(0, 0, 0, 0.35);
+  box-sizing: border-box;
+  padding: 6px;
+  flex-shrink: 0;
+}
+
+#focusPanel {
+  margin-top: 25px;
+  position: relative;
+}
+
+#imagePanel {
+  margin-top: 10px;
+}
+
+#title {
+  font-size: 30px;
+  text-align: center;
+  border-bottom: 1px solid #fff;
+  background: rgba(0, 0, 0, 0.35);
+  padding-top: 10px;
+  padding-bottom: 15px;
+}
+
+a {
+  color: #0adcff;
+}
+
+@media (max-width: 779px) {
+  #title {
+    font-size: 20px;
+  }
+
+  #word {
+    font-size: 60px;
+  }
+
+  #feedback {
+    font-size: 40px;
+  }
+
+  .control {
+    font-size: 15px;
+  }
+}
+
+#footerContent {
+  padding: 15px 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+.footerBlock {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+}
+
+.footerBlock > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 20px;
+}
+
+/* me again */
+.hide {
+  visibility: hidden;
+  display: none;
+}
+
+.buttonFooter {
+  padding: 5px 10px;
+  margin-right: 10px;
+}
+
+#sourceContainer {
+  margin-right: 15px;
+}
+
+#nextMessage {
+  font-style: italic;
+  font-size: 18px;
+  display: block;
+  position: relative;
+  top: 100%;
+}
+
+.fullPanel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 20;
+  color: #fff;
+}
+
+.overlayPanel {
+  background: #041e39;
+}
+
+.verticalPanel {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.panelContent {
+  width: 95%;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  text-align: center;
+}
+
+.fullPanel h1,
+#titlePanel h1 {
+  font-size: 40px;
+}
+
+#helpContent p {
+  font-size: 1.2em;
+  width: 55%;
+  margin: 10px auto;
+}
+
+#helpContent li {
+  width: 60%;
+  margin: 7px auto;
+  text-align: left;
+}
+
+.textDark {
+  color: #222;
+}
+
+.textDark a {
+  color: #0d1033;
+}
+
+hr {
+  width: 100%;
+  border-bottom: 1px solid white;
+}
+
+input[disabled=""] {
+  background: #cccccc;
+  color: #222222;
+  font-style: italic;
+}
+
+/** this app **/
+
+#imagePanel {
+  width: 65%;
+}
+
+#inputPanel {
+  width: 30%;
+}
+
+input {
+  width: 95%;
+}
+
+#pixels {
+  width: 92%;
+}
+
+input, #pixels {
+  font-family: monospace;
+  font-size: 12px;
+  font-feature-settings: 'zero' 1;
+  font-variant-numeric: slashed-zero;
+}
+
+input.halfWidth {
+  width: 15%;
+  text-align: right;
+  padding: 2px 8px;
+}
+
+#pixels {
+  resize: vertical;
+  min-height: 10vh;
+  max-height: 15vh;
+}
+
+.optionBlock {
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin: 10px 0;
+}
+
+.optionBlock h4 {
+  text-align: center;
+  margin: 5px 0 10px 0;
+}
+
+.optionBox {
+  display: flex;
+  flex-direction: column;
+}
+
+.inputBlock {
+  gap: 10px;
+  justify-content: center;
+}
+
+.symbol {
+  position: relative;
+  top: 3px;
+  font-family: monospace;
+  
+}
+
+.ui-checkboxradio-label {
+  margin: 8px auto;
+  display: block;
+  max-width: 85%;
+}
+
+.cell {
+  width: 30px;
+  height: 30px;
+}
+
+#image {
+  border: 25px solid #fff;
+  border-color: #fff;
+  box-sizing: border-box;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  row-gap: 0;
+  align-content: flex-start;
+}
+
+#width, #height, #border, #pixels {
+  text-transform: uppercase;
+}
+
+/** share **/
+
+#shareURLContainer {
+  justify-content: space-between;
+  gap: 15px;
+  padding: 0 15px;
+  height: 40px;
+  width: 100%;
+}
+
+#shareURLContainer a {
+  color: #fff;
+  /*position: relative;*/
+  top: 10px;
+  font-family: monospace;
+  font-size: 12px;
+}
+
+/*#shareURL {*/
+/*  flex-grow: 1;*/
+/*  overflow-x: scroll;*/
+/*  height: 28px;*/
+/*  font-size: 9px;*/
+/*  font-family: monospace;*/
+/*}*/
+
+#shareURLContainer button {
+  height: 35px;
+  width: 100px;
+}
