@@ -20,135 +20,134 @@
 
 <body>
 <div id='app'>
-    <div id='mainPanel'>
-        <div id='gamePanel' class='fullPanel'>
-            <div id='titlePanel'>
-                <h1 id='title'>Image Encoder</h1>
-            </div>
-            <div id='focusPanel' class='flexRowCenter'>
-                <div id='imagePanel' class='flexRowCenter'>
-                    <div id='imageColumn' class='flexCol'>
-                        <canvas id='canvas' title='Right-click to save image.'></canvas>
-                    </div>
+    <div id='titlePanel'>
+        <h1 id='title'>Image Encoder</h1>
+    </div>
+    <div id='gamePanel' class="fullPanel">
+        <div id='focusPanel' class='flexRowCenter'>
+            <div id='imagePanel' class='flexRowCenter'>
+                <div id='imageColumn' class='flexCol'>
+                    <canvas id='canvas' title='Right-click to save image.'></canvas>
                 </div>
-                <div id='inputPanel' class='flexRowCenter'>
-                    <div id='inputColumn' class='flexCol'>
+            </div>
+            <div id='inputPanel' class='flexRowCenter'>
+                <div id='inputColumn' class='flexCol'>
 
-                        <div class='optionBlock'>
-                            <h4>Share</h4>
-                                <div id="shareURLContainer" class="flexRowCenter hideScrollbar">
-                                    <div id='shareURLLabel' class="flexCol flexColCenter">Link</div>
-                                    <a id="shareURL" class="hideScrollbar shareURLItem flexCol flexColCenter" href="#"
-                                       title="Image Encoder">Image Encoder</a>
-                                    <p id="shareURLInvalidNotice"
-                                       class="hideScrollbar shareURLItem flexCol flexColCenter hide">Too much data for
-                                        URL encoding.</p>
-                                    <div id="btnCopyShareURLContainer">
-                                        <button id="btnCopyShareURL" class="buttonBase buttonEffects"
-                                                title="Copy the share URL to the clipboard. Hotkey U">Copy URL [U]
-                                        </button>
-                                    </div>
-                                </div>
-                        </div>
-                        <div class='optionBlock'>
-                            <div class='optionBox'>
-                                <label for='width'>
-                                    <h4>Dimensions</h4>
-                                    <label for='optHexModeDimensions' class='tooltip' title='Use hex instead of binary'>
-
-                                        <input type='checkbox' id='optHexModeDimensions'/>
-                                        <span class='checkmark'></span>
-                                        Hex</label>
-                                    <div class='inputBlock flexRowCenter'>
-                                        <div class='symbol'>Width</div>
-                                        <input type='text' class='halfWidth' id='width' value='101'/>
-                                        <div class='symbol'>x</div>
-                                        <input type='text' class='halfWidth' id='height' value='101'/>
-                                        <div class='symbol'>Height</div>
-                                    </div>
-                                </label>
-                            </div>
-
-                        </div>
-
-                        <div class='optionBlock'>
-
-                            <div class='optionBox'>
-                                <label for='border'>
-                                    <h4>Border</h4>
-                                    <label for='optRGBModeBorder' class='tooltip'
-                                           title='Use hex + RGB instead of binary'>
-                                        <input type='checkbox' id='optRGBModeBorder'/>
-                                        <span class='checkmark'></span>
-                                        Hex + RGB</label>
-                                    <div class='inputBlock flexRowCenter'>
-                                        <div class='symbol'>Colour</div>
-                                        <input type='text' class='halfWidth' id='border' value='1'/>
-                                    </div>
-                                </label>
-                            </div>
-
-                        </div>
-                        <div class='optionBlock'>
-                            <div class='optionBox'>
-                                <label for='pixels'>
-                                    <h4>Pixels</h4>
-                                    <label for='optRGBModePixels' class='tooltip' title='Use RGB instead of B/W'>
-                                        <input type='checkbox' id='optRGBModePixels'/>
-                                        <span class='checkmark'></span>
-                                        Hex + RGB</label>
-                                    <div class='inputBlock flexRowCenter'>
-                                        <textarea id='pixels'>1010110101111110111010001</textarea>
-                                    </div>
-                                </label>
-                            </div>
-                        </div>
-
-                        <div class='optionBlock' id="optionBlockHistory">
-                            <div class='optionBox'>
-                                    <h4>History</h4>
-                                <div id="historySelector" class="flexRowCenter"><div id="historyCurrent" class="historySelected">Current</div></div>
-                                <div id="historyButtons"  class="flexRowCenter">
-                                    <button id="btnHistoryBack" class="buttonBase buttonEffects" title="Back"><i class="fa-solid fa-backward"></i></button>
-                                    <button id="btnHistoryForward" class="buttonBase buttonEffects" title="Forward"><i class="fa-solid fa-forward"></i></button>
-                                </div>
+                    <div class='optionBlock'>
+                        <h4>Share</h4>
+                        <div id="shareURLContainer" class="flexRowCenter hideScrollbar">
+                            <div id='shareURLLabel' class="flexCol flexColCenter">Link</div>
+                            <a id="shareURL" class="hideScrollbar shareURLItem flexCol flexColCenter" href="#"
+                               title="Image Encoder">Image Encoder</a>
+                            <p id="shareURLInvalidNotice"
+                               class="hideScrollbar shareURLItem flexCol flexColCenter hide">Too much data for
+                                URL encoding.</p>
+                            <div id="btnCopyShareURLContainer">
+                                <button id="btnCopyShareURL" class="buttonBase buttonEffects"
+                                        title="Copy the share URL to the clipboard. Hotkey U">Copy URL [U]
+                                </button>
                             </div>
                         </div>
                     </div>
+                    <div class='optionBlock'>
+                        <div class='optionBox'>
+                            <label for='width'>
+                                <h4>Dimensions</h4>
+                                <label for='optHexModeDimensions' class='tooltip' title='Use hex instead of binary'>
+
+                                    <input type='checkbox' id='optHexModeDimensions'/>
+                                    <span class='checkmark'></span>
+                                    Hex</label>
+                                <div class='inputBlock flexRowCenter'>
+                                    <div class='symbol'>Width</div>
+                                    <input type='text' class='halfWidth' id='width' value='101'/>
+                                    <div class='symbol'>x</div>
+                                    <input type='text' class='halfWidth' id='height' value='101'/>
+                                    <div class='symbol'>Height</div>
+                                </div>
+                            </label>
+                        </div>
+
+                    </div>
+
+                    <div class='optionBlock'>
+
+                        <div class='optionBox'>
+                            <label for='border'>
+                                <h4>Border</h4>
+                                <label for='optRGBModeBorder' class='tooltip'
+                                       title='Use hex + RGB instead of binary'>
+                                    <input type='checkbox' id='optRGBModeBorder'/>
+                                    <span class='checkmark'></span>
+                                    Hex + RGB</label>
+                                <div class='inputBlock flexRowCenter'>
+                                    <div class='symbol'>Colour</div>
+                                    <input type='text' class='halfWidth' id='border' value='1'/>
+                                </div>
+                            </label>
+                        </div>
+
+                    </div>
+                    <div class='optionBlock'>
+                        <div class='optionBox'>
+                            <label for='pixels'>
+                                <h4>Pixels</h4>
+                                <label for='optRGBModePixels' class='tooltip' title='Use RGB instead of B/W'>
+                                    <input type='checkbox' id='optRGBModePixels'/>
+                                    <span class='checkmark'></span>
+                                    Hex + RGB</label>
+                                <div class='inputBlock flexRowCenter'>
+                                    <textarea id='pixels'>1010110101111110111010001</textarea>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class='optionBlock' id="optionBlockHistory">
+                        <div class='optionBox'>
+                            <h4>History</h4>
+                            <div id="historySelector" class="flexRowCenter">
+                                <div id="historyCurrent" class="historySelected">Current</div>
+                            </div>
+                            <div id="historyButtons" class="flexRowCenter">
+                                <button id="btnHistoryBack" class="buttonBase buttonEffects" title="Back"><i
+                                        class="fa-solid fa-backward"></i></button>
+                                <button id="btnHistoryForward" class="buttonBase buttonEffects" title="Forward"><i
+                                        class="fa-solid fa-forward"></i></button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
             </div>
-
         </div>
-        <div id="helpPanel" class="hide fullPanel verticalPanel overlayPanel">
-            <div id="helpContent" class="panelContent">
-                <h1>Help</h1>
-                <hr/>
-                <p><strong>Image Encoder</strong> is a simple demo of how images could be encoded using a linear array
-                    of binary or hexademical pixels.</p>
-                <p>The width and height can be specified in binary or hex.</p>
-                <p>Pixels can be expressed using binary (01) for black and white respectively, in which case each digit
-                    is a pixel. Or they can be expressed using hex (0123456789ABCDEF) in blocks of 6 characters
-                    corresponding to traditional RGB hex codes.</p>
-                <p>You can also toggle whether the border is in binary B&W or hex RGB. Clear the input to remove the
-                    border.</p>
-                <p>Finally, you can share images using a URL, or right-click the image itself to download it.</p>
-                <p>Notes</p>
-                <ul>
-                    <li>Missing pixels will be transparent and show the background of the app.</li>
-                    <li>Extra pixels will be ignored. In RGB mode, unfinished pixels will be interpreted as hex codes if
-                        possible.
-                    </li>
-                    <li>Illegal characters will be ignored. This also means you can use line breaks to organize your
-                        pixels without affecting the result.
-                    </li>
-                    <li>Conversion is done automatically. When converting from hex/RGB to binary/B&W, since this is a
-                        lossy encoding, any colour with an average brightness >= 50% will be converted to white (1),
-                        otherwise it will be converted to black (0).
-                    </li>
-                    <li>This tool is not guaranteed to be responsive on mobile devices.</li>
-                </ul>
-            </div>
+    </div>
+    <div id="helpPanel" class="hide fullPanel verticalPanel">
+        <div id="helpContent" class="panelContent">
+            <h2>Help</h2>
+            <p><strong>Image Encoder</strong> is a simple demo of how images could be encoded using a linear array
+                of binary or hexademical pixels.</p>
+            <p>The width and height can be specified in binary or hex.</p>
+            <p>Pixels can be expressed using binary (01) for black and white respectively, in which case each digit
+                is a pixel. Or they can be expressed using hex (0123456789ABCDEF) in blocks of 6 characters
+                corresponding to traditional RGB hex codes.</p>
+            <p>You can also toggle whether the border is in binary B&W or hex RGB. Clear the input to remove the
+                border.</p>
+            <p>Finally, you can share images using a URL, or right-click the image itself to download it.</p>
+            <p>Notes</p>
+            <ul>
+                <li>Missing pixels will be transparent and show the background of the app.</li>
+                <li>Extra pixels will be ignored. In RGB mode, unfinished pixels will be interpreted as hex codes if
+                    possible.
+                </li>
+                <li>Illegal characters will be ignored. This also means you can use line breaks to organize your
+                    pixels without affecting the result.
+                </li>
+                <li>Conversion is done automatically. When converting from hex/RGB to binary/B&W, since this is a
+                    lossy encoding, any colour with an average brightness >= 50% will be converted to white (1),
+                    otherwise it will be converted to black (0).
+                </li>
+                <li>This tool is not guaranteed to be responsive on mobile devices.</li>
+            </ul>
         </div>
     </div>
     <div id='footer'>
