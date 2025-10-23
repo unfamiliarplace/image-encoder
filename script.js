@@ -380,11 +380,11 @@ const unpackSaveData = (data) => {
     return;
   }
 
-  let w = parseInt(data.get("w"), 36);
-  let h = parseInt(data.get("h"), 36);
-  let p = lio.decompress(data.get("p"));
-  let b = parseInt(data.get("b"), 36);
-  let s = data.get("s");
+  let w = parseInt(data["w"], 36);
+  let h = parseInt(data["h"], 36);
+  let p = lio.decompress(data["p"]);
+  let b = parseInt(data["b"], 36);
+  let s = data.get["s"];
 
   setData(w, h, p, b, s);
 }
