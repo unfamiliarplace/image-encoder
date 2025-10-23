@@ -1,5 +1,7 @@
 const baseURL = "https://g.sawczak.com/image-encoder";
 
+const maxHistoryStates = 5;
+
 let canvasWidth = 500;
 let maxPixels = 300_000;
 
@@ -427,10 +429,24 @@ const updateShareURL = () => {
 
 const historyBack = () => {
   console.log('stepped back in history');
+
+  if (historyState <= (-1 * (maxHistoryStates - 1))) {
+    return;
+  }
+
+  historyState -= 1;
+  restoreHistory(historyState);
 }
 
 const historyForward = () => {
   console.log('stepped forward in history');
+
+  if (historyState >= 0) {
+    return;
+  }
+
+  historyState += 1;
+  restoreHistory(historyState);
 }
 
 const saveHistory = () => {
@@ -483,6 +499,8 @@ const initialize = () => {
 };
 
 let history = [];
+let historyState = 0;
+
 let copyToast;
 let lio = new LinkIO(
     baseURL,
