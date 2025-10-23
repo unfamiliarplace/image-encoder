@@ -29,10 +29,8 @@ let ctx = null;
 const stage = new Stage();
 
 const addScenes = () => {
-  stage.addScene(
-    new Scene("game", "#gamePanel", "", [$("#gamePanel button")])
-  );
-  stage.addScene(new Scene("help", "#helpPanel", "#btnHelp", []));
+  stage.createScene("game", "#gamePanel");
+  stage.createScene("help", "#helpPanel", "#btnHelp");
 
   stage.setDefault("game");
 };
