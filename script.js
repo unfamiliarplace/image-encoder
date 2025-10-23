@@ -384,7 +384,7 @@ const unpackSaveData = (data) => {
   let h = parseInt(data["h"], 36);
   let p = lio.decompress(data["p"]);
   let b = parseInt(data["b"], 36);
-  let s = data.get["s"];
+  let s = data["s"];
 
   setData(w, h, p, b, s);
 }
