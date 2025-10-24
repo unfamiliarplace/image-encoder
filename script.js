@@ -31,7 +31,6 @@ const stage = new Stage();
 const addScenes = () => {
   stage.createScene("game", "#gamePanel");
   stage.createScene("help", "#helpPanel", "#btnHelp");
-
   stage.setDefault("game");
 };
 
