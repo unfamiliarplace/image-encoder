@@ -70,7 +70,26 @@ const filterInput = (input, base) => {
   return filtered;
 };
 
+const dataIsValid = (data) => {
+  return !(isNaN(data['w'])) && !(isNaN(data['h']));
+}
+
+const updateHistory = () => {
+  let newState = packSaveData();
+  if (! dataIsValid(newState)) {
+    return;
+  }
+
+  if (history.length >= maxHistoryStates) {
+    history.pop();
+  }
+
+  history = [newState].concat(history);
+  console.log(history);
+}
+
 const updateContent = () => {
+  updateHistory();
   updateShareURL();
   updateImage();
 };
@@ -495,7 +514,7 @@ const initialize = () => {
   lio.readURL();
 };
 
-let history = [];
+let history = {};
 let historyState = 0;
 
 let copyToast;
