@@ -340,18 +340,34 @@ input.halfWidth {
   width: 100px;
 }
 
+/* fixes */
+
+#border {
+  width: 50%;
+}
+
 /* history */
 
 /* TODO */
 #optionBlockHistory {
-  display: none;
+  /*display: none;*/
 }
 
-#historySelector {
+#historyStatesView {
   margin-top: 5px;
+  gap: 5px;
+  justify-content: space-between;
 }
 
-.historySelected {
+.historySelector {
+  padding: 2px 7px;
+}
+
+.historySelectorHidden {
+  visibility: hidden;
+}
+
+.historySelectorSelected {
   font-style: italic;
 }
 

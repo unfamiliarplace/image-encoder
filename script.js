@@ -1,26 +1,27 @@
 const baseURL = "https://g.sawczak.com/image-encoder";
 
-const maxHistoryStates = 5;
+const maxHistoryStates = 6;
 
 let canvasWidth = 500;
 let maxPixels = 300_000;
 
+let basePack = 36;
 let baseBorder = 2;
 let basePixels = 2;
 let baseDimensions = 2;
 
-let optHexModeDimensions = null;
-let optRGBModePixels = null;
-let optRGBModeBorder = null;
+let optHexModeDimensions = false;
+let optHexModePixels = false;
+let optHexModeBorder = false;
 
-let defaultWidth = "101";
-let defaultHeight = "101";
+let defaultWidth = 5;
+let defaultHeight = 5;
 let defaultPixels = "1010110101111110111010001";
 let defaultBorder = "1";
 
 let defaultHexModeDimensions = false;
-let defaultRGBModePixels = false;
-let defaultRGBModeBorder = false;
+let defaultHexModePixels = false;
+let defaultHexModeBorder = false;
 
 let canvasEl = null;
 let canvas = null;
@@ -70,13 +71,31 @@ const filterInput = (input, base) => {
   return filtered;
 };
 
-const dataIsValid = (data) => {
-  return !(isNaN(data['w'])) && !(isNaN(data['h']));
+const initializeHistoryView = () => {
+  let cell;
+  for (let i = maxHistoryStates - 1; i > 0; i--) {
+    cell = `<button class="historySelector buttonBase buttonEffects historySelectorHidden" data-state="${i}">-${i}</button>`;
+    $('#historyStatesView').append(cell);
+  }
+
+  cell = `<button class="historySelector buttonBase buttonEffects historySelectorSelected" disabled="true" data-state="0">Newest</button>`;
+  $('#historyStatesView').append(cell);
 }
+
+const updateHistoryView = () => {
+
+}
+
 
 const updateHistory = () => {
   let newState = packSaveData();
-  if (! dataIsValid(newState)) {
+  console.log(newState);
+
+  if (! dataIsPackable(newState)) {
+    return;
+  }
+
+  if ((history.length > 0) && dataIsEqual(newState, history[0])) {
     return;
   }
 
@@ -85,7 +104,9 @@ const updateHistory = () => {
   }
 
   history = [newState].concat(history);
-  console.log(history);
+
+  localStorage.setItem('history', JSON.stringify(history));
+  updateHistoryView();
 }
 
 const updateContent = () => {
@@ -230,19 +251,33 @@ const getPixelColour = (pixel, base) => {
   }
 };
 
-const reset = () => {
+const compileDefaultData = () => {
   let settings = "";
   settings += defaultHexModeDimensions ? "1" : "0";
-  settings += defaultRGBModePixels ? "1" : "0";
-  settings += defaultRGBModeBorder ? "1" : "0";
+  settings += defaultHexModePixels ? "1" : "0";
+  settings += defaultHexModeBorder ? "1" : "0";
 
-  setData(defaultWidth, defaultHeight, defaultPixels, defaultBorder, settings);
+  return {
+    'width': defaultWidth,
+    'height': defaultHeight,
+    'pixels': defaultPixels,
+    'border': defaultBorder,
+    'settings': settings
+  }  
+}
+
+const packDefaultData = () => {
+  return packData(compileDefaultData());
+}
+
+const reset = () => {
+  setData(compileDefaultData());
 };
 
 const createDynamicOptions = () => {
   optHexModeDimensions = new OptionCheckbox($("#optHexModeDimensions"));
-  optRGBModePixels = new OptionCheckbox($("#optRGBModePixels"));
-  optRGBModeBorder = new OptionCheckbox($("#optRGBModeBorder"));
+  optHexModePixels = new OptionCheckbox($("#optHexModePixels"));
+  optHexModeBorder = new OptionCheckbox($("#optHexModeBorder"));
 };
 
 const getPixelList = () => {
@@ -283,11 +318,11 @@ const pixelHexToBin = (pixel) => {
   }
 };
 
-const toggleRGBModePixels = () => {
+const toggleHexModePixels = () => {
   let pixelList = getPixelList();
   let newPixelList = [];
 
-  basePixels = optRGBModePixels.value() ? 16 : 2;
+  basePixels = optHexModePixels.value() ? 16 : 2;
 
   let total = 0;
   if (basePixels === 2) {
@@ -325,10 +360,10 @@ const toggleHexModeDimensions = () => {
   updateContent();
 };
 
-const toggleRGBModeBorder = () => {
+const toggleHexModeBorder = () => {
   let currColour = filterInput($("#border").val(), baseBorder);
 
-  baseBorder = optRGBModeBorder.value() ? 16 : 2;
+  baseBorder = optHexModeBorder.value() ? 16 : 2;
   let newColour;
 
   if (currColour === "") {
@@ -349,30 +384,48 @@ const toggleRGBModeBorder = () => {
 const compileSaveData = () => {
   let data = {};
 
-  data["width"] = parseInt(
-      filterInput($("#width").val(), baseDimensions),
-      baseDimensions
-  ).toString(36);
-  data["height"] = parseInt(
-      filterInput($("#height").val(), baseDimensions),
-      baseDimensions
-  ).toString(36);
-  data["pixels"] = lio.compress(filterInput($("#pixels").val(), basePixels));
-  data["border"] = parseInt(
-      filterInput($("#border").val(), baseBorder),
-      baseBorder
-  ).toString(36);
+  data["width"] = filterInput($("#width").val().trim(), baseDimensions);
+  data["height"] = filterInput($("#height").val().trim(), baseDimensions);
+
+  data['width'] = (data['width'].length === 0) ? 0 : parseInt(data['width'], baseDimensions);
+  data['height'] = (data['height'].length === 0) ? 0 : parseInt(data['height'], baseDimensions);
+
+  data["pixels"] = $("#pixels").val();
+  data["border"] = $("#border").val();
 
   data["settings"] = "";
   data["settings"] += optHexModeDimensions.value() ? "1" : "0";
-  data["settings"] += optRGBModePixels.value() ? "1" : "0";
-  data["settings"] += optRGBModeBorder.value() ? "1" : "0";
+  data["settings"] += optHexModePixels.value() ? "1" : "0";
+  data["settings"] += optHexModeBorder.value() ? "1" : "0";
 
   return data;
 };
 
-const packSaveData = () => {
-  let data = compileSaveData();
+const parseInputValue = (val, base) => {
+  return parseInt(filterInput(val, base), base);
+}
+
+const rebaseInputValue = (val, from, to) => {
+  return parseInputValue(val, from).toString(to);
+}
+
+const dataIsPackable = (data) => {
+
+  return [
+    !isNaN(data['width']) && (data['width'] > 0),
+    !isNaN(data['height']) && (data['height'] > 0),
+
+  ].every(Boolean);
+}
+
+const packData = (data) => {
+  if (!dataIsPackable(data)) {
+    return {};
+  }
+
+  data["width"] = data['width'].toString(basePack);
+  data["height"] = data['height'].toString(basePack);
+  data["pixels"] = lio.compress(filterInput(data["pixels"], basePixels));
 
   JSTools.renameObjectKeys(data, {
     width: "w",
@@ -383,6 +436,10 @@ const packSaveData = () => {
   });
 
   return data;
+}
+
+const packSaveData = () => {
+  return packData(compileSaveData());
 }
 
 const unpackSaveData = (data) => {
@@ -398,28 +455,28 @@ const unpackSaveData = (data) => {
     return;
   }
 
-  let w = parseInt(data["width"], 36);
-  let h = parseInt(data["height"], 36);
-  let p = lio.decompress(data["pixels"]);
-  let b = parseInt(data["border"], 36);
-  let s = data["settings"];
+  data['width'] = parseInt(data["width"], basePack);
+  data['height'] = parseInt(data["height"], basePack);
+  data['pixels'] = lio.decompress(data["pixels"]);
 
-  setData(w, h, p, b, s);
+  setData(data);
 }
 
-const setData = (width, height, pixels, border, settings) => {
+const setData = (data) => {
+  let settings = data['settings'];
+
   optHexModeDimensions.value(settings[0] === "1");
-  optRGBModePixels.value(settings[1] === "1");
-  optRGBModeBorder.value(settings[2] === "1");
+  optHexModePixels.value(settings[1] === "1");
+  optHexModeBorder.value(settings[2] === "1");
 
   toggleHexModeDimensions();
-  toggleRGBModePixels();
-  toggleRGBModeBorder();
+  toggleHexModePixels();
+  toggleHexModeBorder();
 
-  $("#width").val(width.toString(baseDimensions));
-  $("#height").val(height.toString(baseDimensions));
-  $("#pixels").val(pixels.toString(basePixels));
-  $("#border").val(border.toString(baseBorder));
+  $("#width").val(data['width'].toString(baseDimensions));
+  $("#height").val(data['height'].toString(baseDimensions));
+  $("#pixels").val(data['pixels'].toString(basePixels));
+  $("#border").val(data['border'].toString(baseBorder));
 
   updateContent();
 };
@@ -443,34 +500,18 @@ const updateShareURL = () => {
 
 /* History */
 
-const historyBack = () => {
-  console.log('stepped back in history');
-
-  if (historyState <= (-1 * (maxHistoryStates - 1))) {
-    return;
-  }
-
-  historyState -= 1;
-  restoreHistory(historyState);
-}
-
-const historyForward = () => {
-  console.log('stepped forward in history');
-
-  if (historyState >= 0) {
-    return;
-  }
-
-  historyState += 1;
-  restoreHistory(historyState);
-}
-
-const saveHistory = () => {
-  console.log('saved history');
-}
-
 const restoreHistory = (id) => {
   console.log(`restored history ${id}`);
+}
+
+const dataIsEqual = (a, b) => {
+  return [
+      a['width'] === b['width'],
+      a['height'] === b['height'],
+      a['pixels'] === b['pixels'],
+      a['border'] === b['border'],
+      a['settings'] === b['settings'],
+  ].every(Boolean);
 }
 
 /* Other */
@@ -488,8 +529,8 @@ const initializeCanvas = () => {
 
 const bind = () => {
   $("#optHexModeDimensions").change(toggleHexModeDimensions);
-  $("#optRGBModePixels").change(toggleRGBModePixels);
-  $("#optRGBModeBorder").change(toggleRGBModeBorder);
+  $("#optHexModePixels").change(toggleHexModePixels);
+  $("#optHexModeBorder").change(toggleHexModeBorder);
 
   $("#width").keyup(updateContent);
   $("#height").keyup(updateContent);
@@ -499,15 +540,13 @@ const bind = () => {
   $("#btnReset").click(reset);
   $("#btnCopyShareURL").click(copyShareURL);
 
-  $('#btnHistoryBack').click(historyBack);
-  $('#btnHistoryForward').click(historyForward);
-
   $(document).keyup(handleKeyup);
 };
 
 const initialize = () => {
   initializeCanvas();
   createDynamicOptions();
+  initializeHistoryView();
   bind();
   stage.show("game");
   reset();
@@ -523,7 +562,7 @@ let lio = new LinkIO(
     packSaveData,
     unpackSaveData,
     () => {
-      return false; // TODO dataIsDefault
+      return dataIsEqual(compileSaveData(), compileDefaultData());
     }
 );
 

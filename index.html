@@ -36,7 +36,7 @@
                     <div class='optionBlock'>
                         <h4>Share</h4>
                         <div id="shareURLContainer" class="flexRowCenter hideScrollbar">
-                            <div id='shareURLLabel' class="flexCol flexColCenter">Link</div>
+<!--                            <div id='shareURLLabel' class="flexCol flexColCenter">Link</div>-->
                             <a id="shareURL" class="hideScrollbar shareURLItem flexCol flexColCenter" href="#"
                                title="Image Encoder">Image Encoder</a>
                             <p id="shareURLInvalidNotice"
@@ -75,11 +75,11 @@
                         <div class='optionBox'>
                             <label for='border'>
                                 <h4>Border</h4>
-                                <label for='optRGBModeBorder' class='tooltip'
+                                <label for='optHexModeBorder' class='tooltip'
                                        title='Use hex + RGB instead of binary'>
-                                    <input type='checkbox' id='optRGBModeBorder'/>
+                                    <input type='checkbox' id='optHexModeBorder'/>
                                     <span class='checkmark'></span>
-                                    Hex + RGB</label>
+                                    Hex (RGB)</label>
                                 <div class='inputBlock flexRowCenter'>
                                     <div class='symbol'>Colour</div>
                                     <input type='text' class='halfWidth' id='border' value='1'/>
@@ -92,10 +92,10 @@
                         <div class='optionBox'>
                             <label for='pixels'>
                                 <h4>Pixels</h4>
-                                <label for='optRGBModePixels' class='tooltip' title='Use RGB instead of B/W'>
-                                    <input type='checkbox' id='optRGBModePixels'/>
+                                <label for='optHexModePixels' class='tooltip' title='Use RGB instead of B/W'>
+                                    <input type='checkbox' id='optHexModePixels'/>
                                     <span class='checkmark'></span>
-                                    Hex + RGB</label>
+                                    Hex (RGB)</label>
                                 <div class='inputBlock flexRowCenter'>
                                     <textarea id='pixels'>1010110101111110111010001</textarea>
                                 </div>
@@ -106,15 +106,14 @@
                     <div class='optionBlock' id="optionBlockHistory">
                         <div class='optionBox'>
                             <h4>History</h4>
-                            <div id="historySelector" class="flexRowCenter">
-                                <div id="historyCurrent" class="historySelected">Current</div>
+                            <div id="historyStatesView" class="flexRowCenter">
                             </div>
-                            <div id="historyButtons" class="flexRowCenter">
-                                <button id="btnHistoryBack" class="buttonBase buttonEffects" title="Back"><i
-                                        class="fa-solid fa-backward"></i></button>
-                                <button id="btnHistoryForward" class="buttonBase buttonEffects" title="Forward"><i
-                                        class="fa-solid fa-forward"></i></button>
-                            </div>
+<!--                            <div id="historyButtons" class="flexRowCenter">-->
+<!--                                <button id="btnHistoryBack" class="buttonBase buttonEffects" title="Back"><i-->
+<!--                                        class="fa-solid fa-backward"></i></button>-->
+<!--                                <button id="btnHistoryForward" class="buttonBase buttonEffects" title="Forward"><i-->
+<!--                                        class="fa-solid fa-forward"></i></button>-->
+<!--                            </div>-->
                         </div>
                     </div>
                 </div>
