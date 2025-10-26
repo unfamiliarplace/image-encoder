@@ -152,6 +152,7 @@ const updateContent = () => {
     updateHistory();
     updateShareURL();
     updateImage();
+    $('#btnReset').prop('disabled', dataIsDefault());
 };
 
 const updateImage = () => {
@@ -307,6 +308,7 @@ const compileDefaultData = () => {
 
 const reset = () => {
     setData(compileDefaultData());
+    clearHistory();
 };
 
 const createDynamicOptions = () => {
@@ -533,6 +535,10 @@ const dataIsEqual = (a, b) => {
     ].every(Boolean);
 }
 
+const dataIsDefault = () => {
+    return dataIsEqual(compileSaveData(), compileDefaultData());
+}
+
 /* Other */
 
 const toggleControl = (control, enable) => {
@@ -589,9 +595,7 @@ let lio = new LinkIO(
     baseURL,
     packSaveData,
     unpackAndSetData,
-    () => {
-        return dataIsEqual(compileSaveData(), compileDefaultData());
-    }
+    dataIsDefault
 );
 
 $(document).ready(initialize);

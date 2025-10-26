@@ -108,12 +108,10 @@
                             <h4>History</h4>
                             <div id="historyStatesView" class="flexRowCenter">
                             </div>
-<!--                            <div id="historyButtons" class="flexRowCenter">-->
-<!--                                <button id="btnHistoryBack" class="buttonBase buttonEffects" title="Back"><i-->
-<!--                                        class="fa-solid fa-backward"></i></button>-->
-<!--                                <button id="btnHistoryForward" class="buttonBase buttonEffects" title="Forward"><i-->
-<!--                                        class="fa-solid fa-forward"></i></button>-->
-<!--                            </div>-->
+                            <div id="historyButtons" class="flexRowCenter">
+                                <button id="btnClearHistory" class="buttonBase buttonEffects" title="Clear history" disabled="true"><i
+                                        class="fa-solid fa-trash"></i></button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -145,6 +143,7 @@
                     lossy encoding, any colour with an average brightness >= 50% will be converted to white (<code>1</code>),
                     otherwise it will be converted to black (<code>0</code>).
                 </li>
+                <li>The history feature is a somewhat overpowered undo/redo that allows you to click through past states. It's linear, which means that if you go to a previous state and make a change, the history up to that state is discarded and a new timeline is started.</li>
                 <li>This tool is probably not responsive on mobile devices.</li>
             </ul>
         </div>
@@ -153,7 +152,7 @@
         <div id='footerContent'>
             <div class='footerBlock' id='footerLeft'>
                 <div id='resetButtonContainer'>
-                    <button id='btnReset' class='buttonBase buttonEffects buttonFooter' title='Remove uploaded data'>
+                    <button id='btnReset' class='buttonBase buttonEffects buttonFooter' title='Remove uploaded data' disabled="true">
                         Reset [R]
                     </button>
                 </div>
