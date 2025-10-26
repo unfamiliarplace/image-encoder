@@ -93,12 +93,6 @@ const updateHistoryView = () => {
     $(`.historySelector[data-state=${historyState}]`).prop('disabled', true);
 }
 
-const clearHistory = () => {
-    history = [];
-    historyState = 0;
-    updateHistoryView();
-}
-
 const updateHistory = () => {
     if (! recordingHistory) {
         return;
@@ -111,6 +105,8 @@ const updateHistory = () => {
     }
 
     newState = packData(newState);
+    console.log(newState);
+
     if ((history.length > 0) && dataIsEqual(newState, history[0])) {
         return;
     }
@@ -120,6 +116,7 @@ const updateHistory = () => {
     }
 
     history = [newState].concat(history);
+    console.log(history);
 
     // TODO a change when non-newest is selected requires discarding up to the newest
 
@@ -293,10 +290,6 @@ const compileDefaultData = () => {
     }
 }
 
-const packDefaultData = () => {
-    return packData(compileDefaultData());
-}
-
 const reset = () => {
     setData(compileDefaultData());
 };
@@ -439,19 +432,15 @@ const packData = (data) => {
         return {};
     }
 
-    data["width"] = data['width'].toString(basePack);
-    data["height"] = data['height'].toString(basePack);
-    data["pixels"] = lio.compress(filterInput(data["pixels"], basePixels));
+    let pd = {};
 
-    JSTools.renameObjectKeys(data, {
-        width: "w",
-        height: "h",
-        pixels: "p",
-        border: "b",
-        settings: "s",
-    });
+    pd["w"] = data['width'].toString(basePack);
+    pd["h"] = data['height'].toString(basePack);
+    pd["p"] = lio.compress(filterInput(data["pixels"], basePixels));
+    pd['b'] = filterInput(data["border"], baseBorder);
+    pd['s'] = data['settings'];
 
-    return data;
+    return pd;
 }
 
 const packSaveData = () => {
@@ -470,19 +459,15 @@ const unpackData = (data) => {
         return;
     }
 
-    JSTools.renameObjectKeys(data, {
-        w: "width",
-        h: "height",
-        p: "pixels",
-        b: "border",
-        s: "settings"
-    });
+    let ud = {};
 
-    data['width'] = parseInt(data["width"], basePack);
-    data['height'] = parseInt(data["height"], basePack);
-    data['pixels'] = lio.decompress(data["pixels"]);
+    ud['width'] = parseInt(data["w"], basePack);
+    ud['height'] = parseInt(data["h"], basePack);
+    ud['pixels'] = lio.decompress(data["p"]);
+    ud['border'] = data["b"];
+    ud['settings'] = data["s"];
 
-    return data;
+    return ud;
 }
 
 const setData = (data) => {
