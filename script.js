@@ -91,36 +91,51 @@ const updateHistoryView = () => {
 
     $(`.historySelector[data-state=${historyState}]`).addClass('historySelectorSelected');
     $(`.historySelector[data-state=${historyState}]`).prop('disabled', true);
+
+    $('#btnClearHistory').prop('disabled', (history.length < 2));
 }
 
 const updateHistory = () => {
+
+    // Not in recording mode
     if (! recordingHistory) {
         return;
     }
 
     let newState = compileSaveData();
 
+    // Change is invalid
     if (!dataIsPackable(newState)) {
         return;
     }
 
     newState = packData(newState);
-    console.log(newState);
 
+    // Change is not material
     if ((history.length > 0) && dataIsEqual(newState, history[0])) {
         return;
     }
 
+    // Too many states
     if (history.length >= maxHistoryStates) {
         history.pop();
     }
 
-    history = [newState].concat(history);
-    console.log(history);
+    // Change made while not on newest state
+    if (historyState !== 0) {
+        history.splice(0, historyState);
+    }
 
-    // TODO a change when non-newest is selected requires discarding up to the newest
+    historyState = 0;
+    history = [newState].concat(history);
 
     updateHistoryView();
+}
+
+const clearHistory = () => {
+    history = [];
+    historyState = 0;
+    updateHistory();
 }
 
 const handleSelectHistoryState = (e) => {
@@ -545,6 +560,7 @@ const bind = () => {
     $("#btnCopyShareURL").click(copyShareURL);
 
     $('.historySelector').click(handleSelectHistoryState);
+    $('#btnClearHistory').click(clearHistory);
 
     $(document).keyup(handleKeyup);
 };
