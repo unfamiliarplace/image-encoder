@@ -36,19 +36,21 @@ const addScenes = () => {
 };
 
 const handleKeyup = (e) => {
-    switch (e.code) {
-        case "KeyR":
-            reset();
-            break;
+    // Decided to remove these due to accidental presses during pixel entry
 
-        case "KeyH":
-            stage.toggle("help");
-            break;
-
-        case "KeyU":
-            copyShareURL();
-            break;
-    }
+    // switch (e.code) {
+    //     case "KeyR":
+    //         reset();
+    //         break;
+    //
+    //     case "KeyH":
+    //         stage.toggle("help");
+    //         break;
+    //
+    //     case "KeyU":
+    //         copyShareURL();
+    //         break;
+    // }
 };
 
 const filterInput = (input, base) => {

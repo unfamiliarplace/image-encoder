@@ -25,18 +25,13 @@
     </div>
     <div id='gamePanel' class="fullPanel">
         <div id='focusPanel' class='flexRowCenter'>
-            <div id='imagePanel' class='flexRowCenter'>
-                <div id='imageColumn' class='flexCol'>
-                    <canvas id='canvas' title='Right-click to save image.'></canvas>
-                </div>
-            </div>
             <div id='inputPanel' class='flexRowCenter'>
                 <div id='inputColumn' class='flexCol'>
 
                     <div class='optionBlock'>
                         <h4>Share</h4>
                         <div id="shareURLContainer" class="flexRowCenter hideScrollbar">
-<!--                            <div id='shareURLLabel' class="flexCol flexColCenter">Link</div>-->
+                            <!--                            <div id='shareURLLabel' class="flexCol flexColCenter">Link</div>-->
                             <a id="shareURL" class="hideScrollbar shareURLItem flexCol flexColCenter" href="#"
                                title="Image Encoder">Image Encoder</a>
                             <p id="shareURLInvalidNotice"
@@ -44,7 +39,7 @@
                                 URL encoding.</p>
                             <div id="btnCopyShareURLContainer">
                                 <button id="btnCopyShareURL" class="buttonBase buttonEffects"
-                                        title="Copy the share URL to the clipboard. Hotkey U">Copy URL [U]
+                                        title="Copy the share URL to the clipboard">Copy URL
                                 </button>
                             </div>
                         </div>
@@ -116,6 +111,11 @@
                     </div>
                 </div>
             </div>
+            <div id='imagePanel' class='flexRowCenter'>
+                <div id='imageColumn' class='flexCol'>
+                    <canvas id='canvas' title='Right-click to save image.'></canvas>
+                </div>
+            </div>
         </div>
     </div>
     <div id="helpPanel" class="hide fullPanel verticalPanel">
@@ -152,8 +152,8 @@
         <div id='footerContent'>
             <div class='footerBlock' id='footerLeft'>
                 <div id='resetButtonContainer'>
-                    <button id='btnReset' class='buttonBase buttonEffects buttonFooter' title='Remove uploaded data' disabled="true">
-                        Reset [R]
+                    <button id='btnReset' class='buttonBase buttonEffects buttonFooter' title='Reset image, settings, and history' disabled="true">
+                        Reset
                     </button>
                 </div>
 
@@ -161,7 +161,7 @@
             <div class='footerBlock' id='footerRight'>
                 <div id='helpButtonContainer'>
                     <button id='btnHelp' class='buttonBase buttonEffects buttonFooter'
-                            title='Show/hide help panel. Hotkey H'>Help [H]
+                            title='Show/hide help panel'>Help
                     </button>
                 </div>
                 <div id="copyrightContainer">
